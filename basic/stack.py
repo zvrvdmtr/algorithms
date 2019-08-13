@@ -1,6 +1,6 @@
+
+
 # stack is list of elements organized by LIFO principle
-
-
 class Stack:
 
     # create new stack
@@ -26,3 +26,30 @@ class Stack:
     # return stack size
     def size(self):
         return len(self.items)
+
+
+# Simple parentheses checker
+def parentheses_checker(symbol_string):
+    s = Stack()
+    balanced = True
+    index = 0
+    while index < len(symbol_string) and balanced:
+        symbol = symbol_string[index]
+        if symbol == '(':
+            s.push(symbol)
+        else:
+            if s.isEmpty():
+                balanced = False
+            else:
+                s.pop()
+
+        index += 1
+    if balanced and s.isEmpty():
+        return True
+    else:
+        return False
+
+
+print(parentheses_checker('((((((())'))
+print(parentheses_checker('(((())))'))
+print(parentheses_checker('(()'))
