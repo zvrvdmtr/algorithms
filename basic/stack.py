@@ -89,3 +89,42 @@ def matches(open, close):
 
 print(parentheses_checker_2('{({([][])}())}'))
 print(parentheses_checker_2('[{()]'))
+
+
+# Algorithm for convert decimal number to binary
+def divide_by_2(number):
+    s = Stack()
+    while 0 < number:
+        rem = number % 2
+        s.push(rem)
+        number = number // 2
+
+    bin = ''
+    while not s.isEmpty():
+        bin = bin + str(s.pop())
+
+    return bin
+
+
+print(divide_by_2(100))
+
+
+# From decimal to ant base converter
+def base_converter(number, base):
+    s = Stack()
+    digits = '0123456789ABCDEF'
+
+    while 0 < number:
+        rem = number % base
+        s.push(rem)
+        number = number // base
+
+    string = ''
+    while not s.isEmpty():
+        string = string + digits[s.pop()]
+
+    return string
+
+
+print(base_converter(25, 2))
+print(base_converter(25, 16))
