@@ -106,7 +106,7 @@ def divide_by_2(number):
     return bin
 
 
-print(divide_by_2(100))
+# print(divide_by_2(100))
 
 
 # From decimal to ant base converter
@@ -128,3 +128,72 @@ def base_converter(number, base):
 
 print(base_converter(25, 2))
 print(base_converter(25, 16))
+
+
+# Converter from infix notation to postfix
+def infix_to_postfix(infix):
+    prec = {
+        '/': 3,
+        '*': 3,
+        '-': 2,
+        '+': 2,
+        '(': 1
+    }
+    opstack = Stack()
+    postfix = []
+    infix_arr = infix.split()
+
+    for symbol in infix_arr:
+        if symbol.isalpha() or symbol.isnumeric():
+            postfix.append(symbol)
+        elif symbol == '(':
+            opstack.push(symbol)
+        elif symbol == ')':
+            top = opstack.pop()
+            while top != '(':
+                postfix.append(top)
+                top = opstack.pop()
+        else:
+            while (not opstack.isEmpty()) and (prec[opstack.peek()] >= prec[symbol]):
+                postfix.append(opstack.pop())
+            opstack.push(symbol)
+
+    while not opstack.isEmpty():
+        postfix.append(opstack.pop())
+
+    return " ".join(postfix)
+
+
+print(infix_to_postfix('A * B + C * D'))
+print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )"))
+
+
+# Math function for calculating postfix expressions
+def postfix_evaluation(postfix):
+    operand = Stack()
+    tokens = postfix.split()
+
+    for i in tokens:
+        if i.isnumeric():
+            operand.push(i)
+        else:
+            op2 = operand.pop()
+            op1 = operand.pop()
+            operand.push(do_math(i, int(op1), int(op2)))
+
+    return operand.items
+
+
+def do_math(op, op1, op2):
+    if op == '*':
+        return op1 * op2
+    if op == '/':
+        return op1 / op2
+    if op == '+':
+        return op1 + op2
+    if op == '-':
+        return op1 - op2
+
+
+print(postfix_evaluation('7 8 + 3 2 + /'))
+print(postfix_evaluation('17 10 + 3 * 9 /'))
