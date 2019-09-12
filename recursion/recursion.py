@@ -1,5 +1,6 @@
 from basic.stack.stack import Stack
 
+
 # Simple recursion func which count sum of numbers
 def list_sum(num):
     if len(num) == 1:
