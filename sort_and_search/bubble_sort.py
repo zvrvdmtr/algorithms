@@ -1,5 +1,6 @@
 # Simple implementation for bubble sort
 
+
 def bubble_sort(data):
     for item in range(len(data)-1):
         for i in range(1, len(data)):

@@ -1,5 +1,6 @@
 # Simple selection sort
 
+
 def selection_sort(data):
     for i in range(len(data)-1, 0, -1):
         max = 0
